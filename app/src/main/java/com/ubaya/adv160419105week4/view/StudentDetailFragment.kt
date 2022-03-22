@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.ubaya.adv160419105week4.R
+import com.ubaya.adv160419105week4.util.loadImage
 import com.ubaya.adv160419105week4.viewmodel.DetailViewModel
 import com.ubaya.adv160419105week4.viewmodel.ListViewModel
 import kotlinx.android.synthetic.main.fragment_student_detail.*
@@ -27,8 +28,12 @@ class StudentDetailFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        var id = ""
+        arguments?.let{
+            id = StudentDetailFragmentArgs.fromBundle(requireArguments()).studentID
+        }
         detailModel = ViewModelProvider(this).get(DetailViewModel::class.java)
-        detailModel.fetch()
+        detailModel.fetch(id)
         observeDetailModel()
     }
 
@@ -37,6 +42,7 @@ class StudentDetailFragment : Fragment() {
             editID.setText(it.id)
             editName.setText(it.name)
             editBOD.setText(it.dob)
+            imageDetailStudentPhoto.loadImage(it.photoUrl,progressLoadingDetailPhoto)
             editPhone.setText(it.phone)
         }
     }
