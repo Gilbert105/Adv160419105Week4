@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.student_list_item.view.*
 import java.lang.Exception
 
 @BindingAdapter("imageUrl","progressBar")
-fun loadImageFromUrl(view:ImageView, url:String, pb: ProgressBar){
+fun loadImageFromUrl(view:ImageView, url:String?, pb: ProgressBar){
     view.loadImage(url,pb)
 }
 
