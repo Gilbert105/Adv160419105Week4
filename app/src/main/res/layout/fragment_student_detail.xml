@@ -113,4 +113,14 @@
         app:layout_constraintEnd_toEndOf="@+id/imageDetailStudentPhoto"
         app:layout_constraintStart_toStartOf="@+id/imageDetailStudentPhoto"
         app:layout_constraintTop_toTopOf="@+id/imageDetailStudentPhoto" />
+
+    <Button
+        android:id="@+id/buttonNotif"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Create Notification"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayout4"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout4" />
 </androidx.constraintlayout.widget.ConstraintLayout>

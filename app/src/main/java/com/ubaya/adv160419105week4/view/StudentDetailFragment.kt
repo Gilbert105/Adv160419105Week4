@@ -1,6 +1,7 @@
 package com.ubaya.adv160419105week4.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +11,10 @@ import com.ubaya.adv160419105week4.R
 import com.ubaya.adv160419105week4.util.loadImage
 import com.ubaya.adv160419105week4.viewmodel.DetailViewModel
 import com.ubaya.adv160419105week4.viewmodel.ListViewModel
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Observable
 import kotlinx.android.synthetic.main.fragment_student_detail.*
+import java.util.concurrent.TimeUnit
 
 /**
  * A simple [Fragment] subclass.
@@ -39,11 +43,22 @@ class StudentDetailFragment : Fragment() {
 
     private fun observeDetailModel() {
         detailModel.studentLiveData.observe(viewLifecycleOwner){
+
+            val student = it
             editID.setText(it.id)
             editName.setText(it.name)
             editBOD.setText(it.dob)
             imageDetailStudentPhoto.loadImage(it.photoUrl,progressLoadingDetailPhoto)
             editPhone.setText(it.phone)
+            buttonNotif.setOnClickListener{
+                Observable
+                    .timer(5, TimeUnit.SECONDS)
+                    .subscribeOn(AndroidSchedulers.mainThread())
+                    .subscribe{
+                        Log.d("mynotif", "Notification delayed by 5 seconds")
+                        MainActivity.showNotification(student.name.toString(), "Notification Created", R.drawable.ic_baseline_person_24)
+                    }
+            }
         }
     }
 }
